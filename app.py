@@ -46,11 +46,10 @@ if uploaded_file is not None:
                     temp_audio.write(uploaded_file.read())
                     temp_audio_path = temp_audio.name
                 # Directly load the audio file
-            audio, sr = librosa.load(temp_audio_path, sr=None)
+            audio = model.transcribe(temp_audio_path)
 
-            # Transcribe audio using Whisper
-            result = model.transcribe(audio)
-            transcript = result["text"]
+           
+            transcript = audio["text"]
             st.write("Transcription successful!")
 
             # Split transcript into chunks for embedding
