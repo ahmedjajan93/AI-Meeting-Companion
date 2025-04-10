@@ -1,0 +1,15 @@
+# installing required libraries in my_env
+transformers
+torch
+langchain
+ibm_watson_machine_learning
+ffmpeg-python 
+streamlit
+requests
+torchaudio 
+librosa
+openai-whisper
+langchain_community
+python-dotenv
+sentence-transformers
+faiss-cpu
