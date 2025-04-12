@@ -12,7 +12,7 @@ import tempfile
 import os
 
 load_dotenv()
-hf_token = os.getenv('OPEAN_API')
+hf_token = os.getenv('OPEN_API')
 # Streamlit page configuration
 st.set_page_config(page_title="🎥 AI Meeting Companion", page_icon=":robot_face:", layout="wide")
 st.title("🎥 AI Meeting Companion")
