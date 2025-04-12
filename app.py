@@ -2,6 +2,7 @@ import streamlit as st
 import torch
 import librosa
 import whisper
+from langchain.chat_models import ChatOpenAI
 from langchain.chains import RetrievalQA
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.vectorstores import FAISS
