@@ -1,4 +1,4 @@
-import streamlit as st 
+import streamlit as st
 import torch
 import librosa
 import whisper
@@ -11,23 +11,25 @@ from dotenv import load_dotenv
 import tempfile
 import os
 
+# Load environment variables
 load_dotenv()
-HF_TOKEN = os.getenv('HF_TOKEN')
 open_token = os.getenv('OPEN_API')
+
 # Streamlit page configuration
 st.set_page_config(page_title="🎥 AI Meeting Companion", page_icon=":robot_face:", layout="wide")
 st.title("🎥 AI Meeting Companion")
 
-  # Model loading with error handling
-llm = ChatOpenAI(
-        model="deepseek/deepseek-r1-distill-llama-70b:free",  # or any model you want from OpenRouter
+# Load the OpenRouter model with error handling
+try:
+    llm = ChatOpenAI(
+        model="deepseek/deepseek-r1-distill-llama-70b:free",
         openai_api_base="https://openrouter.ai/api/v1",
-        openai_api_key=open_token 
-)
+        openai_api_key=open_token
+    )
+except Exception as e:
+    st.error(f"Failed to load the model: {e}")
 
-
-
-# Load the Whisper model
+# Load Whisper model
 @st.cache_resource
 def load_whisper_model(model_name):
     return whisper.load_model(model_name)
@@ -40,16 +42,12 @@ uploaded_file = st.file_uploader("Choose a file", type=["mp4", "mov", "mp3", "wa
 if uploaded_file is not None:
     with st.spinner("Processing your file..."):
         try:
-            
-            
-            
             with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_audio:
-                    temp_audio.write(uploaded_file.read())
-                    temp_audio_path = temp_audio.name
-                # Directly load the audio file
-            audio = model.transcribe(temp_audio_path)
+                temp_audio.write(uploaded_file.read())
+                temp_audio_path = temp_audio.name
 
-           
+            # Transcribe the audio file using Whisper
+            audio = model.transcribe(temp_audio_path)
             transcript = audio["text"]
             st.write("Transcription successful!")
 
