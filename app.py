@@ -6,7 +6,6 @@ from langchain.chains import RetrievalQA
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain.embeddings import HuggingFaceEmbeddings
-from langchain_community.llms import HuggingFaceHub
 from dotenv import load_dotenv
 import tempfile
 import os
