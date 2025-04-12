@@ -12,16 +12,16 @@ import tempfile
 import os
 
 load_dotenv()
-
+hf_token = os.getenv('OPEAN_API')
 # Streamlit page configuration
 st.set_page_config(page_title="🎥 AI Meeting Companion", page_icon=":robot_face:", layout="wide")
 st.title("🎥 AI Meeting Companion")
 
-# Initialize Hugging Face LLM (e.g., Zephyr-7B)
-llm = HuggingFaceHub(
-    repo_id="HuggingFaceH4/zephyr-7b-beta",
-    model_kwargs={"temperature": 0.5, "max_length": 512},
-    huggingfacehub_api_token=os.getenv("API_TOKEN"),
+  # Model loading with error handling
+llm = ChatOpenAI(
+        model="deepseek/deepseek-r1-distill-llama-70b:free",  # or any model you want from OpenRouter
+        openai_api_base="https://openrouter.ai/api/v1",
+        openai_api_key=hf_token 
 )
 
 
